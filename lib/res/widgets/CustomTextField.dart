@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
       this.hintText,
       this.stroke = true,
       this.bottomMargin = 0.0,
+      this.readOnly = false,
       this.onChanged,
       this.isError = false,
       this.onFieldSubmitted,
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
   late double height;
   late double? width;
   late String? hintText;
+  late bool readOnly;
   late bool isError;
   late bool stroke;
   late double bottomMargin;
@@ -43,6 +45,7 @@ class CustomTextField extends StatelessWidget {
       child: Center(
         child: TextFormField(
           onChanged: onChanged,
+          readOnly: readOnly,
           autofocus: true,
           textInputAction: TextInputAction.newline,
           onFieldSubmitted: onFieldSubmitted,
@@ -62,7 +65,7 @@ class CustomTextField extends StatelessWidget {
               contentPadding: const EdgeInsets.symmetric(
                   vertical: kDefaultPadding, horizontal: kDefaultPadding),
               hintText: hintText,
-              hintMaxLines: 1,
+              hintMaxLines: 1000,
               hintStyle: const TextStyle(
                   color: Colors.white12, fontWeight: FontWeight.w400)),
         ),

@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 import 'package:ohrana_truda/presentation/login/LoginScreen.dart';
 import 'package:ohrana_truda/presentation/registration/RegistrationScreen.dart';
 import 'package:ohrana_truda/res/theme/colors.dart';
+import 'package:ohrana_truda/res/widgets/admin.dart';
 import 'domain/store/app/core_app.dart';
 import 'presentation/polzovatel/polzScreen.dart';
 
@@ -32,13 +33,12 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/loginScreen',
-        builder: (BuildContext context, GoRouterState state) =>
-        LoginScreen(),
+        builder: (BuildContext context, GoRouterState state) => LoginScreen(),
       ),
       GoRoute(
         path: '/registrationScreen',
         builder: (BuildContext context, GoRouterState state) =>
-       RegistrationScreen(),
+            RegistrationScreen(),
       ),
     ],
   );
@@ -63,8 +63,9 @@ class MyApp extends StatelessWidget {
                   decorationColor: Colors.white),
               scaffoldBackgroundColor: Colors.white),
         ),
-        builder: (_) => autorun((_) =>_effectNavigation(coreApp.stateApp)));
+        builder: (_) => autorun((_) => _effectNavigation(coreApp.stateApp)));
   }
+
   void _effectNavigation(StateApp state) {
     Future.delayed(const Duration(milliseconds: 1000), () {
       switch (state) {

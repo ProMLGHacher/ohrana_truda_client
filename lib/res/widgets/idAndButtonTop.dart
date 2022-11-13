@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ohrana_truda/res/theme/colors.dart';
+import 'package:ohrana_truda/res/widgets/CustomButton.dart';
 
 class IdAndButton extends StatelessWidget {
   const IdAndButton({
@@ -28,10 +30,12 @@ class IdAndButton extends StatelessWidget {
             )
           ],
         ),
-        Text(
-          'ID - 28765675',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 26),
-        ),
+        CustomButton(
+          'Скачать паспорт',
+          color: primary,
+          textColor: Colors.white,
+          width: 200,
+        )
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ohrana_truda/res/theme/consts.dart';
 
 import 'CustomTextField.dart';
 
@@ -14,7 +15,7 @@ class GendersFields extends StatelessWidget {
         children: [
           Flexible(
               child: CustomTextField(
-            hintText: 'Кол-во Женщин',
+            hintText: isAdmin ? '3' : 'Кол-во Женщин',
             stroke: true,
           )),
           SizedBox(
@@ -22,7 +23,7 @@ class GendersFields extends StatelessWidget {
           ),
           Flexible(
               child: CustomTextField(
-            hintText: 'Кол-во Мужчин',
+            hintText: isAdmin ? '6' : 'Кол-во Мужчин',
             stroke: true,
           )),
         ],

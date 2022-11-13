@@ -22,28 +22,9 @@ class _DropZoneState extends State<DropZone> {
   FileQuotaCross quota = FileQuotaCross(quota: 0, usage: 0);
 
   late DropzoneViewController controller1;
-  String message = 'Добавь архив документов';
+  String message =
+      isAdmin ? 'Пользователь не загрузил файлов' : 'Добавь архив документов';
   bool highlighted = false;
-
-  setFilePicker(FilePickerCross filePicker) => setState(() {
-        filePickerCross = filePicker;
-        filePickerCross!.saveToPath(path: filePickerCross!.fileName!);
-      });
-
-  void _selectFile(context) {
-    FilePickerCross.importMultipleFromStorage().then((filePicker) {
-      setFilePicker(filePicker[0]);
-      setState(() {
-        print(filePicker.first.fileName);
-        message = '${filePicker.first.fileName} загружен';
-        if (filePicker.first.fileName.toString().split('.').last != 'rar' ||
-            filePicker.first.fileName.toString().split('.').last != 'zip' ||
-            filePicker.length > 1) {
-          message = 'Это не архив(';
-        }
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,20 +75,17 @@ class _DropZoneState extends State<DropZone> {
               onDrop: (ev) async {
                 print('Zone 1 drop: ${ev.name}');
                 setState(() {
-                  message = '${ev.name} загружен';
-                  if (ev.name.toString().split('.').last != 'rar' &&
-                      ev.name.toString().split('.').last != 'zip') {
+                  if (ev.name.toString().split('.').last == 'rar' ||
+                      ev.name.toString().split('.').last == 'zip') {
+                    message = '${ev.name} загружен';
+                  } else {
                     message = 'Это не архив(';
                   }
                   highlighted = false;
                 });
                 final bytes = await controller1.getFileData(ev);
               },
-              onDropMultiple: (ev) async {
-                setState(() {
-                  message = 'Это не архив(';
-                });
-              },
+              onDropMultiple: (ev) async {},
             ),
           ),
           // Positioned.fill(

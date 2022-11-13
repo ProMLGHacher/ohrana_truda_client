@@ -8,6 +8,8 @@ const kDefaultPadding = 16.0;
 const kDefaultVerticalPadding = SizedBox(height: kDefaultPadding);
 const kDefaultHorizontalPadding = SizedBox(width: kDefaultPadding);
 
+bool isAdmin = false;
+
 const leftDemoData = [
   'Наименование ОПФ юрлица',
   'Полное наименование организации (для ИП - ФИО)',
@@ -16,6 +18,16 @@ const leftDemoData = [
   'Основной вид деятельности по ОКВЭД',
   'Телефон'
 ];
+
+const leftDemoDataAdmin = [
+  "ООО 'Акбулак'",
+  'Акбулаков Акбулак Акбулакович',
+  'Акбул',
+  '234523464565437645',
+  'Работаю)',
+  '89878884054'
+];
+
 const rightDemoData = [
   'Адрес юридический',
   'Адрес фактический (необязательно)',
@@ -23,6 +35,15 @@ const rightDemoData = [
   'E-mail официальный',
   'ФИО и должность специалиста по охране труда',
   'Среднесписочная численность работников'
+];
+
+const rightDemoDataAdmin = [
+  'г. Акбулак ул. Акбулакова 1',
+  'г. Акбулак ул. Акбулакова 1',
+  'Акбулаков Акбулак Акбулакович',
+  'akbulak.mail.ru',
+  'Акбулакd Акбул Акбулакивич',
+  '9'
 ];
 
 final zayavkaDemoData = [
@@ -50,11 +71,13 @@ const nav = [
   'Кол-ный догвор'
 ];
 final navPosition = Observable(1);
+int previouspos = 1;
 
 void changeNavPosition(int pos) {
   final con = ActionController(name: "navPos");
   final info = con.startAction(name: "navPos.changeStateMS");
   try {
+    previouspos = navPosition.value;
     navPosition.value = pos;
   } finally {
     con.endAction(info);

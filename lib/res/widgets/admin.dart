@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ohrana_truda/main.dart';
 import 'package:ohrana_truda/res/theme/colors.dart';
 import 'package:ohrana_truda/res/theme/consts.dart';
@@ -114,25 +115,32 @@ class Zayavka extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 0),
-      margin: EdgeInsets.only(bottom: bottomMargin),
-      decoration: BoxDecoration(
-        borderRadius: kDefauldborderRadius,
-        border: Border.all(color: getColorFromState(state)),
-        color: Color(0x2442486B),
-      ),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text('ID - ' + id),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text(organization), getTextFromState(state)],
+    return GestureDetector(
+      onTap: () {
+        isAdmin = true;
+        GoRouter.of(context).go('/main');
+      },
+      child: Container(
+        height: height,
+        width: width,
+        padding: EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 0),
+        margin: EdgeInsets.only(bottom: bottomMargin),
+        decoration: BoxDecoration(
+          borderRadius: kDefauldborderRadius,
+          border: Border.all(color: getColorFromState(state)),
+          color: Color(0x2442486B),
         ),
-        Text(date)
-      ]),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text('ID - ' + id),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text(organization), getTextFromState(state)],
+          ),
+          Text(date)
+        ]),
+      ),
     );
   }
 
@@ -158,12 +166,12 @@ class Zayavka extends StatelessWidget {
         );
       case PasportState.success:
         return Text(
-          'На модерации',
+          'Подтверждён',
           style: TextStyle(color: Colors.greenAccent),
         );
       case PasportState.rejected:
         return Text(
-          'На модерации',
+          'Отклонён',
           style: TextStyle(color: Colors.red),
         );
     }
